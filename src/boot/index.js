@@ -38,7 +38,7 @@ try {
   // back to the URLs embedded in the boot script.
   if (scriptUrl.pathname.endsWith('/boot.js')) {
     assetRoot = assetRoot || new URL('./', scriptUrl).href;
-    sidebarAppUrl = sidebarAppUrl || new URL('app.html', scriptUrl);
+    sidebarAppUrl = sidebarAppUrl || new URL('app.html', scriptUrl).href;
   }
 } catch (e) {
   // IE does not support `document.currentScript` or the URL constructor.
