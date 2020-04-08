@@ -5,7 +5,7 @@ function assetUrl(url) {
   return `https://marginal.ly/client/build/${url}`;
 }
 
-describe('bootstrap', function () {
+describe('boot/boot', function () {
   let fakePolyfills;
   let iframe;
 
@@ -60,7 +60,7 @@ describe('bootstrap', function () {
 
     boot(iframe.contentDocument, {
       sidebarAppUrl: 'https://marginal.ly/app.html',
-      assetRoot: 'https://marginal.ly/client/',
+      assetRoot: 'https://marginal.ly/client/build/',
       manifest: manifest,
     });
   }
