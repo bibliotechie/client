@@ -4,6 +4,7 @@ default: help
 .PHONY: help
 help:
 	@echo "make help              Show this help message"
+	@echo "make app               Build the app for the API at $API_URL"
 	@echo "make dev               Run the app in the development server"
 	@echo "make lint              Run the code linter(s) and print any warnings"
 	@echo "make checkformatting   Check code formatting"
@@ -14,6 +15,10 @@ help:
 	@echo "make checkdocs         Crash if building the docs website fails"
 	@echo "make clean             Delete development artefacts (cached files, "
 	@echo "                       dependencies, etc)"
+
+.PHONY: app
+app: build/manifest.json
+	node_modules/.bin/gulp build
 
 .PHONY: dev
 dev: build/manifest.json
