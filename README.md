@@ -1,50 +1,53 @@
-Hypothesis client
+Antithesis client
 =================
 
-[![Build status](https://img.shields.io/travis/hypothesis/client/master.svg)][travis]
-[![npm version](https://img.shields.io/npm/v/hypothesis.svg)][npm]
-[![#hypothes.is IRC channel](https://img.shields.io/badge/IRC-%23hypothes.is-blue.svg)][irc]
 [![BSD licensed](https://img.shields.io/badge/license-BSD-blue.svg)][license]
 
-[travis]: https://travis-ci.org/hypothesis/client
-[npm]: https://www.npmjs.com/package/hypothesis
-[irc]: https://www.irccloud.com/invite?channel=%23hypothes.is&amp;hostname=irc.freenode.net&amp;port=6667&amp;ssl=1
-[license]: https://github.com/hypothesis/client/blob/master/LICENSE
+[license]: https://github.com/bibliotechie/client/blob/master/LICENSE
 
-The Hypothesis client is a browser-based tool for making annotations on web
-pages. It’s a client for the [Hypothesis web annotation service][service].
-It’s used by the [Hypothesis browser extension][ext], and can also be
-[embedded directly into web pages][embed].
+The Antithesis client is a browser-based tool for making annotations on
+Antithesis pages. It’s a client for the [Antithesis server][service], where it
+is intended to be directly embedded. It's a fork of the
+[Hypothesis client][upstream]. Aside from the goal of integrating with the
+Antithesis server, it's also intended to be more privacy-conscious, by removing
+all third-party requests, so that all data stays on the Antithesis server.
 
 ![Screenshot of Hypothesis client](/images/screenshot.png?raw=true)
 
-[service]: https://github.com/hypothesis/h
-[ext]: https://chrome.google.com/webstore/detail/hypothesis-web-pdf-annota/bjfhmglciegochdpefhhlphglcehbmek
-[embed]: https://h.readthedocs.io/projects/client/en/latest/publishers/embedding/
+[service]: https://github.com/bibliotechie/antithesis
+[upstream]: https://github.com/hypothesis/client
+
 
 Development
 -----------
 
-See the client [Development Guide][developers] for instructions on building,
-testing and contributing to the client.
+To build the client, you need to have `make`, [Node.js][node] v6.3+, and
+[Yarn][yarn] installed. If you're using Debian/Ubuntu/etc., note that while it's
+likely possible to get Node.js and Yarn from the default apt repos, it's
+generally not recommended, since they don't get frequent updates. Follow the
+instructions on the respective sites to install them instead.
 
-[developers]: https://h.readthedocs.io/projects/client/en/latest/developers/
+Once you have those set up, building consists of running `make app` in the top
+level source directory, with the `API_URL` environment variable set to the URL
+of the API root. If this is intended to be a production build, you should also
+set `NODE_ENV=production`. If you're using oauth for some reason (Antithesis
+doesn't support it, but h does), then you'll also need to set the
+`OAUTH_CLIENT_ID` environment variable. 
 
-Community
----------
+To install on the Antithesis server, copy the `build/` directory as Antithesis's
+`root/client/` directory. If it hasn't been set up already, you'll
+also need to add the following line to the "HTML code to append to each regular
+page" setting of the full Antithesis site config (it's under "Layout" on that
+page):
 
-See our [Contact page to join us on Slack](https://web.hypothes.is/contact/), or [log in once you've already created an account](https://hypothesis-open.slack.com/) - or in [#hypothes.is][irc] on
-[freenode](https://freenode.net/) for discussion.
+`<script src="http://[antithesis-url]/client/boot.js"></script>`
 
-If you'd like to contribute to the project, you should consider subscribing to
-the [development mailing list][ml], where we can help you plan your
-contributions.
+where `[antithesis-url]` is the location you're running the Antithesis server.
 
-Please note that this project is released with a [Contributor Code of
-Conduct][coc]. By participating in this project you agree to abide by its terms.
+[git]: https://git-scm.com/
+[node]: https://nodejs.org/
+[yarn]: https://yarnpkg.com/lang/en/
 
-[ml]: https://groups.google.com/a/list.hypothes.is/forum/#!forum/dev
-[coc]: https://github.com/hypothesis/client/blob/master/CODE_OF_CONDUCT
 
 License
 -------
