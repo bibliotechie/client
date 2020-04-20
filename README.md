@@ -10,7 +10,8 @@ Antithesis pages. It’s a client for the [Antithesis server][service], where it
 is intended to be directly embedded. It's a fork of the
 [Hypothesis client][upstream]. Aside from the goal of integrating with the
 Antithesis server, it's also intended to be more privacy-conscious, by removing
-all third-party requests, so that all data stays on the Antithesis server.
+all third-party requests and unneeded tracking, so that the only data leaving
+the browser is what is needed to use the service.
 
 ![Screenshot of Hypothesis client](/images/screenshot.png?raw=true)
 
@@ -24,14 +25,19 @@ Development
 To build the client, you need to have `make`, [Node.js][node] v6.3+, and
 [Yarn][yarn] installed. If you're using Debian/Ubuntu/etc., note that while it's
 likely possible to get Node.js and Yarn from the default apt repos, it's
-generally not recommended, since they don't get frequent updates. Follow the
-instructions on the respective sites to install them instead.
+generally not recommended, since they don't get frequent updates, and there's a
+good chance you won't be able to build. Follow the instructions on the
+respective sites to install them instead (using their respective apt repos is
+recommended).
 
 Once you have those set up, building consists of running `make app` in the top
-level source directory, with the `API_URL` environment variable set to the URL
-of the API root. If this is intended to be a production build, you should also
-set `NODE_ENV=production`. If you're using oauth for some reason (Antithesis
-doesn't support it, but h does), then you'll also need to set the
+level source directory, with the `API_URL` environment variable exported with
+the URL of the API root (including the leading `https://`/`http://` and trailing
+`/`). For development builds, keep in mind that this URL should be the full URL
+from the perspective of the browser, not the host, so use forwarded ports as
+needed. If this is intended to be a production build, then you should also
+`export NODE_ENV=production`. If you're using oauth for some reason (Antithesis
+doesn't support it, but h does), then you'll also need to export the
 `OAUTH_CLIENT_ID` environment variable. 
 
 To install on the Antithesis server, copy the `build/` directory as Antithesis's
